@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en" manifest="offline.manifest"> <!--<![endif]-->
+<head>
+
+	<!-- Basic Page Needs
+  ================================================== -->
+	<meta charset="utf-8">
+	<title>Workout Book</title>
+	<meta name="description" content="Track your workouts with this offline html5 mobile optimized app">
+	<meta name="author" content="Daniel Westendorf @dwestendorf">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+	<!-- Mobile Specific Metas
+  ================================================== -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- CSS
+  ================================================== -->
+
+	<link rel="stylesheet" href="stylesheets/style-v1.min.css">
+
+	<!-- Favicons
+	================================================== -->
+	<link rel="shortcut icon" href="images/favicon.ico">
+	<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+
+</head>
+<body>
+
+<script type="text/template" id="workout-info-template">
+	<% var workout_entries = entries()._wrapped %>
+	<%= 'Average '+ metric().get('type').toLowerCase() + ' of ' + metric().attributes.fromNumeric(average()) +'<br/>'%>
+	<% var compared_to_last = compare(workout_entries[workout_entries.length - 2].get('value'), workout_entries[workout_entries.length - 1].get('value')) %>
+	<%=  compared_to_last.percent_change +' ('+compared_to_last.change+') than previous entry<br/>'%>
+	<% var compared_to_first = compare(workout_entries[0].get('value'), workout_entries[workout_entries.length - 1].get('value')) %>
+	<%=  compared_to_first.percent_change +' ('+compared_to_first.change+') than first entry<br/>'%>
+</script>
+
+<script type="text/template" id="workout-template">
+	<% var workout_entries = entries()._wrapped %>
+	<div class="workout-wrapper" id="<%= id %>">
+		<h5><%= get('title') %></h5>
+			<a href="#" class="delete-workout">X</a>
+			<div class="graph" id="graph-<%= id %>" <% if (workout_entries.length < 2) {%><%= 'style="display:none;"' %><%}; %> ></div>
+			<p class="half-bottom" id="info-<%= id %>" <% if (workout_entries.length < 2) {%><%= 'style="display:none;"' %><%}; %> >
+			</p>
+		<table width="100%" <% if (workout_entries.length < 1) {%><%= 'style="display:none;"' %><%}; %> >
+			<thead>
+				<tr>
+					<th>Date</th><th><%= metric().get('type') %></th><th>&nbsp;</th>
+				</tr>
+			</thead>	
+			<tbody>
+				<% entries().each(function(entry){ %><tr id="entry-<%= entry.get('id') %>"><td><%= new Date(entry.get('date')).toDateString() %></td><td><%= entry.get('value') %></td><td><a href="#" class="delete-entry" data-id="<%= entry.get('id') %>">X</a></td></tr><%}) %>
+			</tbody>
+		</table>
+		<% if (workout_entries.length < 1) {%><%= '<p class="no-entries">Currently no entries</p>' %><%}; %>
+		<p><input name="new-entry" <% if (navigator.userAgent.match(/Android/i)) { %><%= 'type="text"' %><% } else { %><%= 'type="tel"' %><% } %> class="<% if (metric().get('type') == 'Time') {%><%= 'time' %><%}; %>"placeholder="Add an entry <%= metric().get('example') %>"/> <button class="remove-bottom">Add Entry</button></p>
+	</div>
+</script>
+
+<script type="text/template" id="app-template">
+	
+	<div id="workouts">
+		
+	</div>
+	<a href="#/new-workout" class="button">Add New Workout</a>
+</script>
+
+<script type="text/template" id="new-workout-template">
+	<div id="new-workout">
+		<h4>Add a new Workout</h4>
+		<form action="#/" id="new-workout-form">
+			<label>Title</label>
+			<input type="text" name="title" placeholder="i.e. Run 1 mile or Benchpress"/>
+			<label>Dynamic Metric:</label>
+			<select name="metric_type">
+				<% each(function(metric){ %>
+					<%= '<option value="'+ metric.get('type') +'">'+ metric.get('type') +'</option>'  %>
+				<% }) %>
+			</select>
+			<input type="submit" value="Add Workout" class="remove-bottom"> <small>or <a href="#/" class="back">cancel</a></small>
+		</form>
+	</div>
+</script>
+
+	<div class="container">		
+		<div id="head" class="row">
+			<a href="#/"><img src="images/logo.png" width="200px"></a>
+		</div>
+		<div id="app"></div>
+	</div>
+	<script type="text/javascript" src="javascripts/app-v2.min.js"></script>
+
+<!-- End Document
+================================================== -->
+</body>
+</html>

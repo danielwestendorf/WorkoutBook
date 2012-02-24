@@ -1,0 +1,20 @@
+@import url(base.css);
+@import url(skeleton.css);
+@import url(layout.css);
+@import url(jquery.jqplot.css);
+
+html, body {background: url('../images/fabric_plaid.png');}
+a {text-decoration: none;}
+#head {margin-top: 20px;}
+.workout, #new-workout {border: 1px solid #333333; border-radius: 3px; background-color: #fff;}
+.workout-wrapper {margin: 5px; position: relative;}
+#new-workout {padding: 5px;}
+.graph { width: 100%; height: 150px; margin-top: 10px;}
+.workout p {margin-top: 10px;}
+.workout table {text-align: left;}
+.workout table tr {border-top: 1px solid rgba(0,0,0,0.15);}
+.workout table thead tr:first-child {border-top: 0;}
+.workout table tr td {padding: 5px 0;}
+.workout table thead th:last-child {text-align: right;}
+.workout table tr td:last-child {text-align: right;}
+.delete-workout {position: absolute; right: 0px; top: 0px; }
