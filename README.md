@@ -12,6 +12,8 @@ Contributing
 
 To contribute, please make your modifications on the app.js file for javascripts, style.css for styles. Submit a pull request and I'll check it out! 
 
+"!http://api.coderwall.com/danielwestendorf/endorsecount.png!":http://coderwall/danielwestendorf
+
 License
 ----------
 Copyright (c) 2012 Daniel Westendorf
