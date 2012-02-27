@@ -1,11 +1,11 @@
 CACHE MANIFEST
-#Version 32
-# Cache Buster:837928hf98h3f279b8b1cb8oish93h99993939393hqucebqyesf838393298239h9hf9
-# jslfjoeiwnovnorioanpoinvoprw
+#Cache Buster: lskjdfoewiwnv3984884292929nekjfnierwnv
 
 CACHE:
-/stylesheets/style-v1.min.css
-/javascripts/app-v2.min.js
+/stylesheets/dep.min.css
+/stylesheets/style.css
+/javascripts/dep.min.js
+/javascripts/app.js
 /images/logo.png
 /images/fabric_plaid.png
 

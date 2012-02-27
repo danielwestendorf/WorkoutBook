@@ -7,6 +7,11 @@ Responsive web design works on Mobile devices, add it to your iPhone homescreen!
 
 Check it out at http://workoutbook.coon-and-friends.com
 
+Contributing
+------------
+
+To contribute, please make your modifications on the app.js file for javascripts, style.css for styles. Submit a pull request and I'll check it out! 
+
 License
 ----------
 Copyright (c) 2012 Daniel Westendorf
